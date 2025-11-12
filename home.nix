@@ -105,7 +105,6 @@ programs.git = {
     ];
   };
 
-
   # Yazi file manager
   programs.yazi = {
     enable = true;
@@ -164,5 +163,8 @@ programs.git = {
 
     # Game dev
     godotPackages_4_5.godot
+
+		# Gaming
+		steam
   ];
 }
