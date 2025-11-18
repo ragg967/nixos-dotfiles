@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 
+let
+  secrets = import ./secrets.nix;
+in
+
 {
   imports =
     [
@@ -9,17 +13,17 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "ryes-nixos"; # Define your hostname.
+  networking.hostName = "ryes-nixos";
   networking.wireless = {
     enable = true;
     networks = {
       "House" = {
-        psk = "c4t3sn3t";
+        psk = secrets.wifiPassword;
       };
     };
   };
 
-  # Set your time zone.
+	# Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
   services.xserver = {
