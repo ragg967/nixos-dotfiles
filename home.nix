@@ -6,6 +6,7 @@ let
   configs = {
     qtile = "qtile";
     nvim = "nvim";
+		kitty="kitty";
   };
 in
 
@@ -130,7 +131,6 @@ programs.git = {
     dust # disk usage
     procs # ps replacement
     btop # system monitor
-		wl-clipboard # clipboard
 
     # Git tools
     lazygit
@@ -147,6 +147,7 @@ programs.git = {
     llvm
     gcc
     clang-tools
+		gnumake
 
     # LSPs and formatters
     nil

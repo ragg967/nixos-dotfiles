@@ -1,6 +1,3 @@
--- colorshceme
-vim.cmd.colorscheme("catppuccin-mocha")
-
 -- vim options
 vim.opt.expandtab = false
 vim.opt.tabstop = 2

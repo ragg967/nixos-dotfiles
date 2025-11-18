@@ -102,16 +102,16 @@ for i in groups:
     )
 
 colors = [
-    ["#1a1b26", "#1a1b26"],  # bg        (primary.background)
-    ["#a9b1d6", "#a9b1d6"],  # fg        (primary.foreground)
-    ["#32344a", "#32344a"],  # color01   (normal.black)
-    ["#f7768e", "#f7768e"],  # color02   (normal.red)
-    ["#9ece6a", "#9ece6a"],  # color03   (normal.green)
-    ["#e0af68", "#e0af68"],  # color04   (normal.yellow)
-    ["#7aa2f7", "#7aa2f7"],  # color05   (normal.blue)
-    ["#ad8ee6", "#ad8ee6"],  # color06   (normal.magenta)
-    ["#0db9d7", "#0db9d7"],  # color15   (bright.cyan)
-    ["#444b6a", "#444b6a"]   # color[9]  (bright.black)
+    ["#6367a4", "#6367a4"],  # bg        (primary.background)
+    ["#fec35d", "#fec35d"],  # fg        (primary.foreground)
+    ["#716162", "#716162"],  # color01   (normal.black)
+    ["#f26655", "#f26655"],  # color02   (normal.red)
+    ["#aeda76", "#aeda76"],  # color03   (normal.green)
+    ["#fef5ca", "#fef5ca"],  # color04   (normal.yellow)
+    ["#a8cee3", "#a8cee3"],  # color05   (normal.blue)
+    ["#d88ee5", "#d88ee5"],  # color06   (normal.magenta)
+    ["#0cb7d6", "#0cb7d6"],  # color15   (bright.cyan)
+    ["#3d3334", "#3d3334"]   # color[9]  (bright.black)
 ]
 
 # helper in case your colors are ["#hex", "#hex"]
@@ -155,6 +155,8 @@ sep = widget.Sep(linewidth=1, padding=8, foreground=colors[9])
 
 screens = [
     Screen(
+        wallpaper='~/nixos-dotfiles/config/bg/kirby.jpg',
+        wallpaper_mode='fill',
         top=bar.Bar(
             widgets = [
                 widget.Spacer(length = 8),
@@ -251,6 +253,12 @@ screens = [
                     mouse_callbacks={
                         'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
                     },
+                ),
+                sep,
+                widget.Volume(
+                    foreground = colors[7],
+                    padding = 8, 
+                    fmt = 'Vol: {}',
                 ),
                 sep,
                 widget.Clock(
