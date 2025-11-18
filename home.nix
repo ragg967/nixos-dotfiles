@@ -144,20 +144,29 @@ programs.git = {
     # Development - General
     neovim
     nodejs
+
+		# Nim
+		nim
+		nimble
+		nimlsp
+
+		# C
     llvm
     gcc
     clang-tools
 		gnumake
 
-    # LSPs and formatters
+    # Nix
     nil
     nixpkgs-fmt
+
+		# Toml
     taplo
+
+    # Python
+    python314
     pyright
     ruff
-
-    # Languages
-    python314
 
     # Wayland tools
     tofi
