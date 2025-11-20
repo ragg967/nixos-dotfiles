@@ -77,18 +77,7 @@ in
     enable = true;
 
     config = {
-      theme = "Catppuccin Mocha";
       style = "numbers,changes,header";
-    };
-
-    themes."Catppuccin Mocha" = {
-      src = pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "bat";
-        rev = "d3feec47b16a8e99eabb34cdfbaa115541d374fc";
-        sha256 = "sha256-s0CHTihXlBMCKmbBBb8dUhfgOOQu9PBCQ+uviy7o47w=";
-      };
-      file = "themes/Catppuccin Mocha.tmTheme";
     };
   };
 
@@ -112,21 +101,6 @@ in
       "--border"
       "--layout=reverse"
     ];
-
-    colors = {
-      bg = "#1e1e2e";
-      "bg+" = "#313244";
-      fg = "#cdd6f4";
-      "fg+" = "#cdd6f4";
-      header = "#f38ba8";
-      hl = "#f38ba8";
-      "hl+" = "#f38ba8";
-      info = "#cba6f7";
-      marker = "#f5e0dc";
-      pointer = "#f5e0dc";
-      prompt = "#cba6f7";
-      spinner = "#f5e0dc";
-    };
   };
 
   programs.yazi = {
