@@ -3,23 +3,30 @@
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   createSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
+
+  # Dotfiles to symlink into ~/.config
   configs = {
     qtile = "qtile";
     nvim = "nvim";
-		kitty="kitty";
+    kitty = "kitty";
+    yazi = "yazi";
   };
-in
 
+in
 {
   home.username = "rye";
   home.homeDirectory = "/home/rye";
   home.stateVersion = "25.05";
 
-  # Fish shell
+  #
+  # ------------------------------------------------------------------------------------------------
+  # Shell: Fish
+  # ------------------------------------------------------------------------------------------------
+  #
   programs.fish = {
     enable = true;
+
     shellAliases = {
-      # System
       rebuild = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#ryes-nixos";
 
       # Modern replacements
@@ -32,7 +39,7 @@ in
       # Git
       lg = "lazygit";
 
-      # System monitoring
+      # Monitoring
       top = "btop";
     };
 
@@ -40,51 +47,68 @@ in
       cat ~/nixos-dotfiles/config/fish/fox.ansi
       set fish_greeting
 
-      # Zoxide init (smart cd)
+      # Zoxide & fzf integration
       zoxide init fish | source
-
-      # fzf keybindings
       fzf --fish | source
     '';
   };
 
-programs.git = {
-  enable = true;
-  userName = "Ragg967";
-  userEmail = "rywatson1027@gmail.com";
-};
+  #
+  # ------------------------------------------------------------------------------------------------
+  # Git
+  # ------------------------------------------------------------------------------------------------
+  #
+  programs.git = {
+    enable = true;
+    userName = "Ragg967";
+    userEmail = "rywatson1027@gmail.com";
+  };
 
-  # Bat (better cat) with Catppuccin Mocha
+  #
+  # ------------------------------------------------------------------------------------------------
+  # Bat (with Catppuccin Mocha Theme)
+  # ------------------------------------------------------------------------------------------------
+  #
   programs.bat = {
     enable = true;
+
     config = {
       theme = "Catppuccin Mocha";
       style = "numbers,changes,header";
     };
-    themes = {
-      "Catppuccin Mocha" = {
-        src = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "bat";
-          rev = "d3feec47b16a8e99eabb34cdfbaa115541d374fc";
-          sha256 = "sha256-s0CHTihXlBMCKmbBBb8dUhfgOOQu9PBCQ+uviy7o47w=";
-        };
-        file = "themes/Catppuccin Mocha.tmTheme";
+
+    themes."Catppuccin Mocha" = {
+      src = pkgs.fetchFromGitHub {
+        owner = "catppuccin";
+        repo = "bat";
+        rev = "d3feec47b16a8e99eabb34cdfbaa115541d374fc";
+        sha256 = "sha256-s0CHTihXlBMCKmbBBb8dUhfgOOQu9PBCQ+uviy7o47w=";
       };
+      file = "themes/Catppuccin Mocha.tmTheme";
     };
   };
 
-  # Zoxide (smart cd)
+  #
+  # ------------------------------------------------------------------------------------------------
+  # Zoxide / FZF / Yazi
+  # ------------------------------------------------------------------------------------------------
+  #
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
   };
 
-  # fzf (fuzzy finder) with Catppuccin Mocha colors
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
     defaultCommand = "fd --type f --hidden --follow --exclude .git";
+
+    defaultOptions = [
+      "--height 40%"
+      "--border"
+      "--layout=reverse"
+    ];
+
     colors = {
       bg = "#1e1e2e";
       "bg+" = "#313244";
@@ -99,82 +123,70 @@ programs.git = {
       prompt = "#cba6f7";
       spinner = "#f5e0dc";
     };
-    defaultOptions = [
-      "--height 40%"
-      "--border"
-      "--layout=reverse"
-    ];
   };
 
-  # Yazi file manager
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
   };
 
-  xdg.configFile = builtins.mapAttrs
-    (name: subpath: {
-      source = createSymlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+  #
+  # ------------------------------------------------------------------------------------------------
+  # Dotfile Symlinks
+  # ------------------------------------------------------------------------------------------------
+  #
+  xdg.configFile =
+    builtins.mapAttrs
+      (_: subpath: {
+        source = createSymlink "${dotfiles}/${subpath}";
+        recursive = true;
+      })
+      configs;
 
+  #
+  # ------------------------------------------------------------------------------------------------
+  # Packages
+  # ------------------------------------------------------------------------------------------------
+  #
   home.packages = with pkgs; [
-    # Modern CLI tools
-    yazi # TUI file manager
-    bat # cat replacement
-    eza # ls replacement
-    fd # find replacement
-    ripgrep # grep replacement
-    zoxide # smart cd
-    fzf # fuzzy finder
-    dust # disk usage
-    procs # ps replacement
-    btop # system monitor
 
-    # Git tools
+    # ------ Modern CLI tools ------
+    yazi
+    bat
+    eza
+    fd
+    ripgrep
+    zoxide
+    fzf
+    dust
+    procs
+    btop
+    slurp
+    grim
+
+    # ------ Git tools ------
     lazygit
     gh
 
-    # Development - Lua
+    # ----- Neovim -----
     luajit
-    luarocks
-    lua-language-server
-
-    # Development - General
-    neovim
-    nodejs
-
-		# Nim
-		nim
-		nimble
-		nimlsp
-
-		# C
-    llvm
     gcc
-    clang-tools
-		gnumake
-
-    # Nix
+    neovim
     nil
     nixpkgs-fmt
 
-		# Toml
-    taplo
-
-    # Python
-    python314
-    pyright
-    ruff
-
-    # Wayland tools
+    # ------ Wayland ------
     tofi
 
-    # Game dev
+    # ------ Game Dev ------
     godotPackages_4_5.godot
 
-		# Gaming
-		steam
+    # ------ Gaming ------
+    steam
   ];
+
 }

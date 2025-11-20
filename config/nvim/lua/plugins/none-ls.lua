@@ -1,17 +1,42 @@
 return {
 	"nvimtools/none-ls.nvim",
 	dependencies = {
-		"nvim-lua/plenary.nvim", -- Add this dependency
+		"nvim-lua/plenary.nvim",
+		"nvimtools/none-ls-extras.nvim",
 	},
 	config = function()
-		local null_ls = require("null-ls")
+		local none_ls = require("null-ls")
 
-		null_ls.setup({
+		none_ls.setup({
 			sources = {
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.prettier,
-				-- null_ls.builtins.diagnostics.eslint_d,
+				-- Lua
+				none_ls.builtins.formatting.stylua,
+
+				-- JS/TS/JSON/CSS/HTML/etc
+				none_ls.builtins.formatting.prettier,
+
+				-- Nix
+				none_ls.builtins.formatting.nixpkgs_fmt,
+
+				-- Python
+				require("none-ls.diagnostics.ruff"),
+				require("none-ls.formatting.ruff"),
+
+				-- Nim - custom nph formatter (not a builtin)
+				none_ls.register({
+					name = "nph",
+					method = none_ls.methods.FORMATTING,
+					filetypes = { "nim", "nimscript", "nims" },
+					generator = none_ls.formatter({
+						command = "nph",
+						args = { "$FILENAME" },
+						to_stdin = false,
+						to_temp_file = true,
+					}),
+				}),
 			},
 		})
+
+		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format file" })
 	end,
 }

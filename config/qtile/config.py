@@ -54,9 +54,9 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "space", lazy.spawn("sh -c 'tofi-drun --drun-launch=true'"), desc='Run Launcher'),
     Key(
-        ["control"], 
-        "F12",
-        lazy.spawn('sh -c "maim -s | xclip -selection clipboard -t image/png -i"'),
+        [],
+        "Print",
+        lazy.spawn('slurp | grim -g - - | wl-copy'),
         desc="Screenshot"
     ),
 ]
