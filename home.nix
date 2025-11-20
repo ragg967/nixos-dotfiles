@@ -10,6 +10,7 @@ let
     nvim = "nvim";
     kitty = "kitty";
     yazi = "yazi";
+    tofi = "tofi";
   };
 
 in
@@ -154,7 +155,7 @@ in
   #
   home.packages = with pkgs; [
 
-    # ------ Modern CLI tools ------
+    # ------ CLI tools ------
     yazi
     bat
     eza
@@ -171,6 +172,7 @@ in
     # ------ Git tools ------
     lazygit
     gh
+    git-crypt
 
     # ----- Neovim -----
     luajit

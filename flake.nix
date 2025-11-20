@@ -1,4 +1,4 @@
-{ 
+{
 	description = "Ryes NixOS";
 
 	inputs = {
