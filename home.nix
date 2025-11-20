@@ -42,6 +42,9 @@ in
 
       # Monitoring
       top = "btop";
+
+      # flake starter
+      snowflake = "cp -r ~/Templates/flake/. .";
     };
 
     interactiveShellInit = ''
