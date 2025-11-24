@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvimtools/none-ls-extras.nvim",
+    "gbprod/none-ls-shellcheck.nvim",
 	},
 	config = function()
 		local none_ls = require("null-ls")
@@ -21,6 +22,10 @@ return {
 				-- Python
 				require("none-ls.diagnostics.ruff"),
 				require("none-ls.formatting.ruff"),
+
+        -- Sh
+            require("none-ls-shellcheck.diagnostics"),
+    require("none-ls-shellcheck.code_actions"),
 
 				-- Nim - custom nph formatter (not a builtin)
 				none_ls.register({
