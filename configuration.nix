@@ -17,7 +17,7 @@ in
   networking.wireless = {
     enable = true;
     networks = {
-      secrets.wifiName = {
+      "House" = {
         psk = secrets.wifiPassword;
       };
     };
