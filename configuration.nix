@@ -17,13 +17,13 @@ in
   networking.wireless = {
     enable = true;
     networks = {
-      "House" = {
+      secrets.wifiName = {
         psk = secrets.wifiPassword;
       };
     };
   };
 
-	# Set your time zone.
+  # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
   services.xserver = {
@@ -52,9 +52,42 @@ in
     "steam-run"
   ];
 
-	programs.steam.enable = true;
+  programs.steam.enable = true;
   programs.fish.enable = true;
   programs.firefox.enable = true;
+
+  #
+  # Audio
+  #
+  hardware.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
+
+  security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # Uncomment the following line if you want to use JACK applications
+    # jack.enable = true;
+  };
+
+
+  services.upower = {
+    enable = true;
+    percentageLow = 20;
+    percentageCritical = 10;
+    percentageAction = 5;
+    criticalPowerAction = "Hibernate"; # or "PowerOff"
+  };
+
+  #
+  # Bluetooth
+  #
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   environment.systemPackages = with pkgs; [
     vim

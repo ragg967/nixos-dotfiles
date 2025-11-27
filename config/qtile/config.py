@@ -8,7 +8,7 @@ import subprocess
 mod = "mod4"
 terminal = guess_terminal()
 
-myTerm = "kitty"      # My terminal of choice
+myTerm = "kitty"  # My terminal of choice
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -17,14 +17,23 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
@@ -48,15 +57,25 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key(
+        [mod],
+        "t",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window",
+    ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "space", lazy.spawn("sh -c 'tofi-drun --drun-launch=true'"), desc='Run Launcher'),
+    Key(
+        [mod],
+        "space",
+        lazy.spawn("sh -c 'tofi-drun --drun-launch=true'"),
+        desc="Run Launcher",
+    ),
     Key(
         [],
         "Print",
-        lazy.spawn('slurp | grim -g - - | wl-copy'),
-        desc="Screenshot"
+        lazy.spawn('sh -c "slurp | grim -g - - | wl-copy"'),
+        desc="Screenshot",
     ),
 ]
 
@@ -95,32 +114,39 @@ for i in groups:
             # ),
             # Or, use below if you prefer not to switch to that group.
             # # mod + shift + group number = move focused window to group
-            Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-                desc="move focused window to group {}".format(i.name)),
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name),
+                desc="move focused window to group {}".format(i.name),
+            ),
         ]
     )
 
 colors = [
-    ["#6367a4", "#6367a4"],  # bg        (primary.background)
-    ["#fec35d", "#fec35d"],  # fg        (primary.foreground)
-    ["#716162", "#716162"],  # color01   (normal.black)
-    ["#f26655", "#f26655"],  # color02   (normal.red)
-    ["#aeda76", "#aeda76"],  # color03   (normal.green)
-    ["#fef5ca", "#fef5ca"],  # color04   (normal.yellow)
-    ["#a8cee3", "#a8cee3"],  # color05   (normal.blue)
-    ["#d88ee5", "#d88ee5"],  # color06   (normal.magenta)
-    ["#0cb7d6", "#0cb7d6"],  # color15   (bright.cyan)
-    ["#3d3334", "#3d3334"]   # color[9]  (bright.black)
+    ["#1f1f28", "#1f1f28"],  # bg        (primary.background)
+    ["#ddd8bb", "#ddd8bb"],  # fg        (primary.foreground)
+    ["#2a2a37", "#2a2a37"],  # color01   (normal.black)
+    ["#e46876", "#e46876"],  # color02   (normal.red)
+    ["#98bb6c", "#98bb6c"],  # color03   (normal.green)
+    ["#e5c283", "#e5c283"],  # color04   (normal.yellow)
+    ["#7e9cd8", "#7e9cd8"],  # color05   (normal.blue)
+    ["#957fb8", "#957fb8"],  # color06   (normal.magenta)
+    ["#7fb4ca", "#7fb4ca"],  # color15   (bright.cyan)
+    ["#363646", "#363646"],  # color[9]  (bright.black)
 ]
 
+
 # helper in case your colors are ["#hex", "#hex"]
-def C(x): return x[0] if isinstance(x, (list, tuple)) else x
+def C(x):
+    return x[0] if isinstance(x, (list, tuple)) else x
+
 
 layout_theme = {
-    "border_width" : 1,
-    "margin" : 1,
-    "border_focus" : colors[6],
-    "border_normal" : colors[0],
+    "border_width": 1,
+    "margin": 1,
+    "border_focus": colors[6],
+    "border_normal": colors[0],
 }
 
 layouts = [
@@ -154,137 +180,150 @@ sep = widget.Sep(linewidth=1, padding=8, foreground=colors[9])
 
 screens = [
     Screen(
-        wallpaper='~/nixos-dotfiles/config/bg/kirby.jpg',
-        wallpaper_mode='fill',
+        wallpaper="~/nixos-dotfiles/config/bg/kirby.jpg",
+        wallpaper_mode="fill",
         top=bar.Bar(
-            widgets = [
-                widget.Spacer(length = 8),
-                widget.Prompt(
-                    font = "Maple Mono NF",
-                    fontsize=14,
-                    foreground = colors[1]
-                ),
+            widgets=[
+                widget.Spacer(length=8),
+                widget.Prompt(font="Maple Mono NF", fontsize=14, foreground=colors[1]),
                 widget.GroupBox(
-                    fontsize = 16,
-                    margin_y = 5,
-                    margin_x = 5,
-                    padding_y = 0,
-                    padding_x = 2,
-                    borderwidth = 3,
-                    active = colors[8],
-                    inactive = colors[9],
-                    rounded = False,
-                    highlight_color = colors[0],
-                    highlight_method = "line",
-                    this_current_screen_border = colors[7],
-                    this_screen_border = colors [4],
-                    other_current_screen_border = colors[7],
-                    other_screen_border = colors[4],
+                    fontsize=16,
+                    margin_y=5,
+                    margin_x=5,
+                    padding_y=0,
+                    padding_x=2,
+                    borderwidth=3,
+                    active=colors[8],
+                    inactive=colors[9],
+                    rounded=False,
+                    highlight_color=colors[0],
+                    highlight_method="line",
+                    this_current_screen_border=colors[7],
+                    this_screen_border=colors[4],
+                    other_current_screen_border=colors[7],
+                    other_screen_border=colors[4],
                 ),
                 widget.TextBox(
-                    text = '|',
-                    font = "Maple Mono NF",
-                    foreground = colors[9],
-                    padding = 2,
-                    fontsize = 14
+                    text="|",
+                    font="Maple Mono NF",
+                    foreground=colors[9],
+                    padding=2,
+                    fontsize=14,
                 ),
-                widget.CurrentLayout(
-                    foreground = colors[1],
-                    padding = 5
-                ),
+                widget.CurrentLayout(foreground=colors[1], padding=5),
                 widget.TextBox(
-                    text = '|',
-                    font = "Maple Mono NF",
-                    foreground = colors[9],
-                    padding = 2,
-                    fontsize = 14
+                    text="|",
+                    font="Maple Mono NF",
+                    foreground=colors[9],
+                    padding=2,
+                    fontsize=14,
                 ),
-                widget.WindowName(
-                    foreground = colors[6],
-                    padding = 8,
-                    max_chars = 40
-                ),
+                widget.WindowName(foreground=colors[6], padding=8, max_chars=40),
                 widget.GenPollText(
-                    update_interval = 300,
-                    func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
-                    foreground = colors[3],
-                    padding = 8, 
-                    fmt = '{}',
+                    update_interval=300,
+                    func=lambda: subprocess.check_output(
+                        "printf $(uname -r)", shell=True, text=True
+                    ),
+                    foreground=colors[3],
+                    padding=8,
+                    fmt="{}",
                 ),
                 sep,
                 widget.CPU(
-                    foreground = colors[4],
-                    padding = 8, 
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e btop')},
+                    foreground=colors[4],
+                    padding=8,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(myTerm + " -e btop")
+                    },
                     format="CPU: {load_percent}%",
                 ),
                 sep,
                 widget.Memory(
-                    foreground = colors[8],
-                    padding = 8, 
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e btop')},
-                    format = 'Mem: {MemUsed:.0f}{mm}',
+                    foreground=colors[8],
+                    padding=8,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(myTerm + " -e btop")
+                    },
+                    format="Mem: {MemUsed:.0f}{mm}",
                 ),
                 sep,
                 widget.DF(
-                    update_interval = 60,
-                    foreground = colors[5],
-                    padding = 8, 
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-disk')},
-                    partition = '/',
-                    #format = '[{p}] {uf}{m} ({r:.0f}%)',
-                    format = '{uf}{m} free',
-                    fmt = 'Disk: {}',
-                    visible_on_warn = False,
+                    update_interval=60,
+                    foreground=colors[5],
+                    padding=8,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(
+                            'kitty -e sh -c "duf"'
+                        ),
+                    },
+                    partition="/",
+                    # format = '[{p}] {uf}{m} ({r:.0f}%)',
+                    format="{uf}{m} free",
+                    fmt="Disk: {}",
+                    visible_on_warn=False,
                 ),
                 sep,
                 widget.Battery(
-                    foreground=colors[6],           # pick a palette slot you like
+                    foreground=colors[6],  # pick a palette slot you like
                     padding=8,
                     update_interval=5,
-                    format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
-                    fmt='Bat: {}',
-                    charge_char='',               # shown while charging
-                    discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
-                    full_char='✔',                 # when at/near 100%
-                    unknown_char='?',
-                    empty_char='!', 
+                    format="{percent:2.0%} {char} {hour:d}:{min:02d}",  # e.g. "73% ⚡ 1:45"
+                    fmt="Bat: {}",
+                    charge_char="",  # shown while charging
+                    discharge_char="",  # Nerd icon; use '-' if you prefer plain ascii
+                    full_char="✔",  # when at/near 100%
+                    unknown_char="?",
+                    empty_char="!",
                     mouse_callbacks={
-                        'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
+                        "Button1": lambda: qtile.cmd_spawn(
+                            'kitty --hold -e sh -c "upower -i $(upower -e | grep BAT)"'
+                        ),
                     },
                 ),
                 sep,
-                widget.Volume(
-                    foreground = colors[7],
-                    padding = 8, 
-                    fmt = 'Vol: {}',
+                widget.PulseVolume(
+                    foreground=colors[7],
+                    padding=8,
+                    mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("pavucontrol")},
+                    fmt="Vol: {}",
                 ),
                 sep,
                 widget.Clock(
-                    foreground = colors[8],
-                    padding = 8, 
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-date')},
-                    ## Uncomment for date and time 
-                    format = "%a, %b %d - %H:%M",
+                    foreground=colors[8],
+                    padding=8,
+                    mouse_callbacks={
+                        "Button1": lambda: qtile.cmd_spawn(
+                            'kitty -e sh -c "calcurse"'
+                        ),
+                    },
+                    ## Uncomment for date and time
+                    format="%a, %b %d - %H:%M",
                     ## Uncomment for time only
                     # format = "%I:%M %p",
                 ),
-                widget.Systray(padding = 6),
-                widget.Spacer(length = 8),
+                widget.Systray(padding=6),
+                widget.Spacer(length=8),
             ],
             # 24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"],  # Borders are magenta
-            margin=[0, 0, 1, 0], 
-            size=30
+            margin=[0, 0, 1, 0],
+            size=30,
         ),
     ),
 ]
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 

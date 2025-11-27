@@ -88,7 +88,7 @@ in
 
   #
   # ------------------------------------------------------------------------------------------------
-  # Zoxide / FZF / Yazi
+  # Other
   # ------------------------------------------------------------------------------------------------
   #
   programs.zoxide = {
@@ -117,6 +117,7 @@ in
     enable = true;
     nix-direnv.enable = true;
   };
+
   #
   # ------------------------------------------------------------------------------------------------
   # Dotfile Symlinks
@@ -136,6 +137,14 @@ in
   # ------------------------------------------------------------------------------------------------
   #
   home.packages = with pkgs; [
+    # ------ System -----
+    pavucontrol # PulseAudio Volume Control
+    pamixer # Command-line mixer for PulseAudio
+    bluez # Bluetooth support
+    bluez-tools # Bluetooth tools
+    upower
+    calcurse
+    duf
 
     # ------ CLI tools ------
     yazi
@@ -148,6 +157,7 @@ in
     dust
     procs
     btop
+    wl-clipboard
     slurp
     grim
 
