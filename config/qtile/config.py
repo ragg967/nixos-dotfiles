@@ -144,7 +144,7 @@ def C(x):
 
 layout_theme = {
     "border_width": 1,
-    "margin": 1,
+    #"margin": 1,
     "border_focus": colors[6],
     "border_normal": colors[0],
 }
@@ -253,7 +253,7 @@ screens = [
                     padding=8,
                     mouse_callbacks={
                         "Button1": lambda: qtile.cmd_spawn(
-                            'kitty -e sh -c "duf"'
+                            'kitty --hold -e sh -c "duf"'
                         ),
                     },
                     partition="/",
@@ -307,7 +307,7 @@ screens = [
             # 24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"],  # Borders are magenta
-            margin=[0, 0, 1, 0],
+            margin=[0, 0, 0, 0],
             size=30,
         ),
     ),

@@ -145,6 +145,8 @@ in
     upower
     calcurse
     duf
+    fastfetchMinimal
+    cpufetch
 
     # ------ CLI tools ------
     yazi
