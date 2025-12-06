@@ -17,7 +17,7 @@ in
 {
   home.username = "rye";
   home.homeDirectory = "/home/rye";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -69,8 +69,10 @@ in
   #
   programs.git = {
     enable = true;
-    userName = "Ragg967";
-    userEmail = "rywatson1027@gmail.com";
+    settings.user = {
+      name = "Ragg967";
+      email = "rywatson1027@gmail.com";
+    };
   };
 
   #
@@ -123,13 +125,10 @@ in
   # Dotfile Symlinks
   # ------------------------------------------------------------------------------------------------
   #
-  xdg.configFile =
-    builtins.mapAttrs
-      (_: subpath: {
-        source = createSymlink "${dotfiles}/${subpath}";
-        recursive = true;
-      })
-      configs;
+  xdg.configFile = builtins.mapAttrs (_: subpath: {
+    source = createSymlink "${dotfiles}/${subpath}";
+    recursive = true;
+  }) configs;
 
   #
   # ------------------------------------------------------------------------------------------------
@@ -145,6 +144,7 @@ in
     upower
     calcurse
     duf
+    brightnessctl
 
     # ----- Fetches -----
     fastfetchMinimal
