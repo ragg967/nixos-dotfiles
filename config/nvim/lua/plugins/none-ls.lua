@@ -16,6 +16,12 @@ return {
         -- JS/TS/JSON/CSS/HTML/etc
         none_ls.builtins.formatting.prettier,
 
+        -- Java
+        none_ls.builtins.formatting.google_java_format,
+        none_ls.builtins.diagnostics.checkstyle.with({
+          extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules
+        }),
+
         -- Nix
         none_ls.builtins.formatting.nixpkgs_fmt,
 
@@ -28,18 +34,9 @@ return {
         require("none-ls-shellcheck.code_actions"),
         none_ls.builtins.formatting.shfmt,
 
-        -- Nim - custom nph formatter (not a builtin)
-        none_ls.register({
-          name = "nph",
-          method = none_ls.methods.FORMATTING,
-          filetypes = { "nim", "nimscript", "nims" },
-          generator = none_ls.formatter({
-            command = "nph",
-            args = { "$FILENAME" },
-            to_stdin = false,
-            to_temp_file = true,
-          }),
-        }),
+        -- Rust
+        none_ls.builtins.formatting.rustfmt,
+        none_ls.builtins.diagnostics.clippy,
       },
     })
 

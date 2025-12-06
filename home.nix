@@ -173,6 +173,7 @@ in
 
     # ----- Neovim -----
     luajit
+    luarocks
     gcc
     neovim
     nil
