@@ -77,6 +77,8 @@ keys = [
         lazy.spawn('sh -c "slurp | grim -g - - | wl-copy"'),
         desc="Screenshot",
     ),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -144,7 +146,7 @@ def C(x):
 
 layout_theme = {
     "border_width": 1,
-    #"margin": 1,
+    # "margin": 1,
     "border_focus": colors[6],
     "border_normal": colors[0],
 }
@@ -292,9 +294,7 @@ screens = [
                     foreground=colors[8],
                     padding=8,
                     mouse_callbacks={
-                        "Button1": lambda: qtile.cmd_spawn(
-                            'kitty -e sh -c "calcurse"'
-                        ),
+                        "Button1": lambda: qtile.cmd_spawn('kitty -e sh -c "calcurse"'),
                     },
                     ## Uncomment for date and time
                     format="%a, %b %d - %H:%M",
