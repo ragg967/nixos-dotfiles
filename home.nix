@@ -125,10 +125,12 @@ in
   # Dotfile Symlinks
   # ------------------------------------------------------------------------------------------------
   #
-  xdg.configFile = builtins.mapAttrs (_: subpath: {
-    source = createSymlink "${dotfiles}/${subpath}";
-    recursive = true;
-  }) configs;
+  xdg.configFile = builtins.mapAttrs
+    (_: subpath: {
+      source = createSymlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
 
   #
   # ------------------------------------------------------------------------------------------------
@@ -172,7 +174,7 @@ in
     git-crypt
 
     # ----- Neovim -----
-    luajit
+    lua
     luarocks
     gcc
     neovim
