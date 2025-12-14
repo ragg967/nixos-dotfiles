@@ -20,6 +20,9 @@ in
       secrets.wifiName1 = {
         psk = secrets.wifiPassword1;
       };
+      secrets.wifiName2 = {
+        psk = secrets.wifiPassword2;
+      };
     };
   };
 
