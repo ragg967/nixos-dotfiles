@@ -126,16 +126,16 @@ for i in groups:
     )
 
 colors = [
-    ["#1f1f28", "#1f1f28"],  # bg        (primary.background)
-    ["#ddd8bb", "#ddd8bb"],  # fg        (primary.foreground)
-    ["#2a2a37", "#2a2a37"],  # color01   (normal.black)
-    ["#e46876", "#e46876"],  # color02   (normal.red)
-    ["#98bb6c", "#98bb6c"],  # color03   (normal.green)
-    ["#e5c283", "#e5c283"],  # color04   (normal.yellow)
-    ["#7e9cd8", "#7e9cd8"],  # color05   (normal.blue)
-    ["#957fb8", "#957fb8"],  # color06   (normal.magenta)
-    ["#7fb4ca", "#7fb4ca"],  # color15   (bright.cyan)
-    ["#363646", "#363646"],  # color[9]  (bright.black)
+    ["#1f1f28", "#1f1f28"],  # bg0      (primary.background)
+    ["#ddd8bb", "#ddd8bb"],  # fg1      (primary.foreground)
+    ["#2a2a37", "#2a2a37"],  # color2   (normal.black)
+    ["#e46876", "#e46876"],  # color3   (normal.red)
+    ["#98bb6c", "#98bb6c"],  # color4   (normal.green)
+    ["#e5c283", "#e5c283"],  # color5   (normal.yellow)
+    ["#7e9cd8", "#7e9cd8"],  # color6   (normal.blue)
+    ["#957fb8", "#957fb8"],  # color7   (normal.magenta)
+    ["#7fb4ca", "#7fb4ca"],  # color8   (bright.cyan)
+    ["#363646", "#363646"],  # color9   (bright.black)
 ]
 
 
@@ -147,24 +147,50 @@ def C(x):
 layout_theme = {
     "border_width": 1,
     # "margin": 1,
-    "border_focus": colors[6],
-    "border_normal": colors[0],
+    "border_focus": colors[2],
+    "border_normal": colors[9],
+}
+
+treetab_theme = {
+    "section": [],
+    "panel_width": 180,
+    "section_top": 1,
+    "section_bottom": 1,
+    "section_left": 1,
+    "section_right": 1,
+    "padding_x": 1,
+    "padding_y": 1,
+
+    "bg_color": colors[0],
+    "active_bg": colors[9],
+    "active_fg": colors[1],
+    "inactive_bg": colors[1],
+    "inactive_fg": colors[9],
+    "section_fg": colors[0],
+    "urgent_bg": colors[3],
+    "urgent_fg": colors[7],
+
+    "fontsize": 14,
+    "font": "Maple Mono NF",
+    "section_fontsize": 14,
+    "vspace": 1,
 }
 
 layouts = [
+    layout.TreeTab(**treetab_theme),
     layout.Columns(**layout_theme),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    layout.MonadTall(**layout_theme),
+    # layout.MonadTall(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
-    # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
+    layout.Floating(),
 ]
 
 widget_defaults = dict(

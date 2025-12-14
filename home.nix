@@ -62,13 +62,6 @@ in
     '';
   };
 
-  services.xserver.libinput = {
-    enable = true;
-    touchpad = {
-      disableWhileTyping = false;
-    };
-  };
-
   #
   # ------------------------------------------------------------------------------------------------
   # Git
