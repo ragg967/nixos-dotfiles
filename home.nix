@@ -22,6 +22,7 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
   };
 
   #
@@ -125,12 +126,10 @@ in
   # Dotfile Symlinks
   # ------------------------------------------------------------------------------------------------
   #
-  xdg.configFile = builtins.mapAttrs
-    (_: subpath: {
-      source = createSymlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs;
+  xdg.configFile = builtins.mapAttrs (_: subpath: {
+    source = createSymlink "${dotfiles}/${subpath}";
+    recursive = true;
+  }) configs;
 
   #
   # ------------------------------------------------------------------------------------------------
