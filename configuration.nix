@@ -56,6 +56,7 @@ in
     "aseprite"
   ];
 
+  programs.aseprite.enable = true;
   programs.steam.enable = true;
   programs.fish.enable = true;
   programs.firefox.enable = true;
