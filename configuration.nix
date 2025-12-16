@@ -53,6 +53,7 @@ in
     "steam-original"
     "steam-unwrapped"
     "steam-run"
+    "aseprite"
   ];
 
   programs.steam.enable = true;
