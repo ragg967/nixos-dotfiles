@@ -126,10 +126,12 @@ in
   # Dotfile Symlinks
   # ------------------------------------------------------------------------------------------------
   #
-  xdg.configFile = builtins.mapAttrs (_: subpath: {
-    source = createSymlink "${dotfiles}/${subpath}";
-    recursive = true;
-  }) configs;
+  xdg.configFile = builtins.mapAttrs
+    (_: subpath: {
+      source = createSymlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
 
   #
   # ------------------------------------------------------------------------------------------------
@@ -185,6 +187,7 @@ in
 
     # ------ Game Dev ------
     godotPackages_4_5.godot
+    aseprite
 
     # ------ Gaming ------
     steam
