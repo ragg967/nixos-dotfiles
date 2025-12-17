@@ -168,6 +168,7 @@ in
     wl-clipboard
     slurp
     grim
+    zip
 
     # ------ Git tools ------
     lazygit
