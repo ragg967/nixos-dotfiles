@@ -187,6 +187,7 @@ in
 
     # ------ Game Dev ------
     godotPackages_4_5.godot
+    aseprite
 
     # ------ Gaming ------
     steam

@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 
 let
@@ -103,8 +104,6 @@ in
     kitty
     git
     wl-clipboard
-    aseprite
-
   ];
 
   fonts = {
