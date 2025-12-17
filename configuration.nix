@@ -1,14 +1,17 @@
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 
 let
   secrets = import ./secrets.nix;
 in
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,13 +51,15 @@ in
     ];
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "steam"
-    "steam-original"
-    "steam-unwrapped"
-    "steam-run"
-    "aseprite"
-  ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
+      "steam-run"
+      "aseprite"
+    ];
 
   programs.steam.enable = true;
   programs.fish.enable = true;
@@ -75,7 +80,6 @@ in
     # Uncomment the following line if you want to use JACK applications
     # jack.enable = true;
   };
-
 
   services.upower = {
     enable = true;
@@ -99,6 +103,8 @@ in
     kitty
     git
     wl-clipboard
+    aseprite
+
   ];
 
   fonts = {
@@ -122,6 +128,9 @@ in
   };
 
   nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "25.11";
 }
