@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 
 let
@@ -41,8 +40,14 @@ in
   };
   services.displayManager.ly.enable = true;
 
-  services.libinput.enable = true;
-
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      tapping = true;
+      naturalScrolling = false;
+      disableWhileTyping = false;
+    };
+  };
   users.users.rye = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
