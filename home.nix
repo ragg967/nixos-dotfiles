@@ -192,6 +192,9 @@ in
 
     # ------ Gaming ------
     steam
+
+    # ------ 3D printing -----
+    orca-slicer
   ];
 
 }
