@@ -26,6 +26,9 @@ in
       "${secrets.wifiName2}" = {
         psk = secrets.wifiPassword2;
       };
+      "${secrets.wifiName3}" = {
+        psk = secrets.wifiPassword3;
+      };
     };
   };
 
