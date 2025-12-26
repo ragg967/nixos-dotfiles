@@ -195,6 +195,9 @@ in
 
     # ------ 3D printing -----
     orca-slicer
+
+    # ----- General programes -----
+    localsend
   ];
 
 }
