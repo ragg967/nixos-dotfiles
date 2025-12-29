@@ -126,10 +126,12 @@ in
   # Dotfile Symlinks
   # ------------------------------------------------------------------------------------------------
   #
-  xdg.configFile = builtins.mapAttrs (_: subpath: {
-    source = createSymlink "${dotfiles}/${subpath}";
-    recursive = true;
-  }) configs;
+  xdg.configFile = builtins.mapAttrs
+    (_: subpath: {
+      source = createSymlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
 
   #
   # ------------------------------------------------------------------------------------------------
@@ -190,6 +192,7 @@ in
 
     # ------ Gaming ------
     steam
+    modrinth-app
 
     # ------ 3D printing -----
     orca-slicer
