@@ -68,6 +68,8 @@ in
       "steam-unwrapped"
       "steam-run"
       "aseprite"
+      "modrinth-app"
+      "modrinth-app-unwrapped"
     ];
 
   programs.steam.enable = true;
