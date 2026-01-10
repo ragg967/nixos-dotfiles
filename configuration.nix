@@ -76,6 +76,15 @@ in
   programs.fish.enable = true;
   programs.firefox.enable = true;
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      zlib
+      # Add other libraries as needed for choreo
+    ];
+  };
+
   #
   # Audio
   #
